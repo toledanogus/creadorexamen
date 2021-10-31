@@ -7,12 +7,13 @@ const url2= 'php/traer_respuestas.php'
 let datosJson = new Object();
     datosJson["tema"]= 'matematicas';
 
-traer_datos(url, datosJson).then(()=>{
-    traer_respuestas(url2, datosJson).then(()=>{
-        pintar();
-        pintar_respuestas();
+traer_datos(url, datosJson)
+    .then(()=>{
+        traer_respuestas(url2, datosJson).then(()=>{
+            pintar().then(()=>{
+                pintar_respuestas();
+            })
+        })
     })
-    
-})
 
-    
+
