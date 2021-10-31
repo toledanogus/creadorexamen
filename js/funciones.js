@@ -5,6 +5,8 @@ let respuestasok;
 let preguntaok=[];
 let numpreg;
 let npreg =[];
+let respuestas_correctas;
+let respuestasCorrectasOk;
 
 export const traer_datos = async(url1, datos)=>{
     const resp = await fetch(url1, {
@@ -51,13 +53,20 @@ export const pintar =async () => {
             crearradio.setAttribute('name', nu);
             creardiv.append(crearradio);
             crearradio.parentNode.insertBefore(crearlabel, crearradio.nextSibling);
-            crearlabel.parentNode.insertBefore(crearbr, crearlabel.nextSibling);           
+            crearlabel.parentNode.insertBefore(crearbr, crearlabel.nextSibling);
+                     
         }
+         
         nu++;
         
         const body = document.querySelector('body');
-        body.appendChild(crearp);        
+        body.appendChild(crearp);
     }
+    const seleccionDelInput = document.querySelectorAll('div');
+        console.log(seleccionDelInput);
+        seleccionDelInput.forEach((y)=>{
+            y.firstChild.required =true; 
+        })
     console.log(npreg);
     console.log('2:pintar');
 }
@@ -89,7 +98,26 @@ export const pintar_respuestas = async() => {
             m++;
             }
         );
-        
-    //console.log('4 pintar respuestas');
+    }
+    console.log('4 pintar respuestas');
 }
+
+export const marcar_rc = async()=>{
+    respuestas_correctas = respuestas.map(x=>x[2]);
+    console.log(respuestas_correctas);
+    respuestasCorrectasOk = respuestas_correctas.map((x)=>{
+        x=='0' ? x='no': x='rc';
+        return x;
+    });
+    console.log(respuestasCorrectasOk);
+    for (let i = 0, n = 0; i < 20; i++) {
+        //Se utiliza el forEach para no convertir el NodeList a un array.
+         document.querySelectorAll(`.g${npreg.indexOf(i)+1}`).forEach((x)=>{
+            x.setAttribute('value', respuestasCorrectasOk[n]);
+            n++;
+            }
+        );
+    
+    }
+    console.log('5 marcar rc');
 }
