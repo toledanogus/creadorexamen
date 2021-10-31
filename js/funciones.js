@@ -81,13 +81,15 @@ export const traer_respuestas = async(url2)=>{
 export const pintar_respuestas = async() => {
     console.log(respuestasok);
     console.log(npreg);
-    for (let k = 0; k < 4; k++) {
+
+    for (let k = 0, m = 0; k < 20; k++) {
         //Se utiliza el forEach para no convertir el NodeList a un array.
-        document.querySelectorAll(`.g${npreg.indexOf(k)+1}`).forEach((x)=>{
-            x.innerText=respuestasok[k];
-            k++;
-        }
+         document.querySelectorAll(`.g${npreg.indexOf(k)+1}`).forEach((x)=>{
+            x.innerText=respuestasok[m];
+            m++;
+            }
         );
-    console.log('4 pintar respuestas');
+        
+    //console.log('4 pintar respuestas');
 }
 }
