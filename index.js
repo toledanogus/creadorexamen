@@ -7,7 +7,7 @@ const url2= 'php/traer_respuestas.php'
 let datosJson = new Object();
     datosJson["tema"]= 'matematicas';
 
-traer_datos(url, datosJson)
+/* traer_datos(url, datosJson)
     .then(()=>{
         traer_respuestas(url2, datosJson).then(()=>{
             pintar().then(()=>{
@@ -16,4 +16,11 @@ traer_datos(url, datosJson)
                 });
             })
         })
-    })
+    }) */
+//Para encadenar las promesas, no lleva llaves después de la flecha
+traer_datos(url, datosJson)
+    .then(()=>traer_respuestas(url2, datosJson))
+    .then(()=>pintar())
+    .then(()=>pintar_respuestas())
+    .then(()=>marcar_rc())
+    
